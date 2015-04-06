@@ -17,40 +17,9 @@ Use `pip`_ to install::
 Usage
 =====
 
-Command Line Usage
-------------------
-
-Pipe a body of text into ``vokram`` and it will generate some (hopefully)
-plausible sentences synthesized from that body of text::
-
-    $ cat the_art_of_war.txt | vokram
-    Spies cannot be obtained inductively from experience, nor by any danger.
-
-You can control the maximum number of words in the output and the n-gram size
-used when building the Markov model. All command line options are given below::
-
-    $ vokram --help
-
-Outputs::
-
-    usage: vokram [-h] [-w NUM_WORDS] [-n NGRAM_SIZE]
-
-    Generates plausible new sentences from a corpus provided on STDIN.
-
-    optional arguments:
-      -h, --help            show this help message and exit
-      -w NUM_WORDS, --num-words NUM_WORDS
-                            Maximum number of words in the resulting sentence.
-      -n NGRAM_SIZE, --ngram-size NGRAM_SIZE
-
-Library Usage
--------------
-
-Vokram can also be used as a plain old Python library::
-
     >>> import vokram
-    >>> corpus = open('the_art_of_war.txt')
-    >>> model = vokram.build_word_model(corpus, 2)
+    >>> corpus = open('the_art_of_war.txt').read().split()
+    >>> model = vokram.Model(2)
     >>> vokram.markov_words(model, 25))
     'Hence it is not supreme excellence; supreme excellence consists in breaking the enemy's few.'
 

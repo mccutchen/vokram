@@ -1,4 +1,6 @@
 import os
+import re
+
 from distutils.core import setup
 
 
@@ -6,9 +8,13 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 
+def get_version():
+    s = read('vokram/__init__.py')
+    return re.search(r"^__version__\s+=\s+'([^']+)'", s).group(1)
+
 setup(
     name='vokram',
-    version='1.0.1',
+    version=get_version(),
     description='A toy Markov chain implementation.',
     long_description=read('README.rst'),
     url='https://github.com/mccutchen/vokram',
@@ -28,5 +34,4 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
     packages=['vokram'],
-    scripts=['bin/vokram'],
 )
